@@ -17,4 +17,31 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/api/register</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UploadBusLocServlet</servlet-name>
+        <servlet-class>bus.api.UploadBusLocServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadBusLocServlet</servlet-name>
+        <url-pattern>/api/uploadLoc</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DownloadBusLocServlet</servlet-name>
+        <servlet-class>bus.api.DownloadBusLocServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DownloadBusLocServlet</servlet-name>
+        <url-pattern>/api/downloadLoc</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ClearBusLocServlet</servlet-name>
+        <servlet-class>bus.api.ClearBusLocServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ClearBusLocServlet</servlet-name>
+        <url-pattern>/api/clearLoc</url-pattern>
+    </servlet-mapping>
 </web-app>

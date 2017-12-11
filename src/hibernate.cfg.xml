@@ -19,5 +19,7 @@
          <property name="hbm2ddl.auto">update</property>
         <mapping class="bus.orm.entity.User"/>
         <mapping resource="bus/orm/entity/User.hbm.xml"/>
+        <mapping class="bus.orm.entity.BusLocation"/>
+        <mapping resource="bus/orm/entity/BusLocation.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

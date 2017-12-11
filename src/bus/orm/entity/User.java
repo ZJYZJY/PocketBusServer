@@ -1,5 +1,8 @@
 package bus.orm.entity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import javax.persistence.*;
 
 @Entity
@@ -48,6 +51,18 @@ public class User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("id", id);
+            json.put("username", username);
+            json.put("nickname", nickname);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
     @Override

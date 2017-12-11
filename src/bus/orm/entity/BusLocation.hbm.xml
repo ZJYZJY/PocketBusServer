@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="bus.orm.entity.BusLocation" table="bus_location" schema="pocket_bus">
+        <id name="uid" column="uid"/>
+        <property name="busId" column="bus_id"/>
+        <property name="userId" column="user_id"/>
+        <property name="latitude" column="latitude"/>
+        <property name="longitude" column="longitude"/>
+        <property name="time" column="time"/>
+    </class>
+</hibernate-mapping>

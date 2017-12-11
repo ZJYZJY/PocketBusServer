@@ -1,8 +1,8 @@
 package bus.api;
 
 import bus.StatuCode;
-import bus.orm.entity.User;
-import bus.orm.service.impl.UserDAOImpl;
+import bus.orm.entity.BusLocation;
+import bus.orm.service.impl.BusLocationDAOImpl;
 import com.alibaba.dubbo.common.utils.IOUtils;
 import com.google.gson.Gson;
 import org.json.JSONException;
@@ -17,27 +17,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-@WebServlet(name = "LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "ClearBusLocServlet")
+public class ClearBusLocServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json; charset=utf-8");
         PrintWriter out = response.getWriter();
 
         String info = IOUtils.read(new InputStreamReader(request.getInputStream()));
         Gson gson = new Gson();
-        User user = gson.fromJson(info, User.class);
+        BusLocation location = gson.fromJson(info, BusLocation.class);
 
         JSONObject result = new JSONObject();
         try {
-            UserDAOImpl userDAOImpl = new UserDAOImpl();
-            User u = userDAOImpl.userLogin(user);
-            if(u != null){
+            BusLocationDAOImpl busLoc = new BusLocationDAOImpl();
+            if(busLoc.clearLocation(location)){
                 result.put("code", StatuCode.SUCCESS);
-                result.put("message", "登录成功");
-                result.put("data", u.toJson());
+                result.put("message", "删除信息成功");
             } else {
                 result.put("code", StatuCode.FAIL);
-                result.put("message", "登录失败");
+                result.put("message", "删除信息失败");
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -48,6 +46,6 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("Hello, I am LoginServlet");
+        out.println("Hello, I am ClearBusLocServlet");
     }
 }

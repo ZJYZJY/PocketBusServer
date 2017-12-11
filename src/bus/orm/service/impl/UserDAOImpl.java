@@ -12,7 +12,7 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
 
     @Override
-    public boolean userLogin(User user) {
+    public User userLogin(User user) {
         Transaction tx = null;
         String hql = "";
         try {
@@ -25,13 +25,17 @@ public class UserDAOImpl implements UserDAO {
             List list = query.list();
             tx.commit();
             if (list.size() > 0) {
-                return true;
+                User u = new User();
+                u.setId(((User)list.get(0)).getId());
+                u.setUsername(((User)list.get(0)).getUsername());
+                u.setNickname(((User)list.get(0)).getNickname());
+                return u;
             } else {
-                return false;
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         } finally {
             if (tx != null) {
                 tx = null;
@@ -50,11 +54,12 @@ public class UserDAOImpl implements UserDAO {
             Query query = session.createQuery(hql);
             query.setParameter(0, user.getUsername());
             List list = query.list();
-            tx.commit();
             if (list.size() > 0) {
+                tx.commit();
                 return false;
             } else {
                 session.save(user);
+                tx.commit();
                 return true;
             }
         } catch (Exception e) {

@@ -13,27 +13,75 @@
     <schema id="7" parent="1" name="performance_schema"/>
     <schema id="8" parent="1" name="sys"/>
     <schema id="9" parent="1" name="trafficassist"/>
-    <table id="10" parent="2" name="user"/>
-    <column id="11" parent="10" name="id">
+    <table id="10" parent="2" name="bus_location"/>
+    <table id="11" parent="2" name="user"/>
+    <column id="12" parent="10" name="uid">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="13" parent="10" name="bus_id">
+      <Position>2</Position>
+      <DataType>varchar(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="10" name="user_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="10" name="latitude">
+      <Position>4</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="10" name="longitude">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="10" name="time">
+      <Position>6</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <index id="18" parent="10" name="user_id">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="19" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>uid</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="20" parent="10" name="user_id">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>pocket_bus</RefSchemaName>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="21" parent="11" name="id">
       <Position>1</Position>
       <DataType>int(8)|0</DataType>
       <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="12" parent="10" name="username">
+    <column id="22" parent="11" name="username">
       <Position>2</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="13" parent="10" name="password">
+    <column id="23" parent="11" name="password">
       <Position>3</Position>
-      <DataType>varchar(16)|0</DataType>
+      <DataType>varchar(32)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="14" parent="10" name="nickname">
+    <column id="24" parent="11" name="nickname">
       <Position>4</Position>
       <DataType>varchar(20)|0</DataType>
     </column>
-    <key id="15" parent="10" name="PRIMARY">
+    <key id="25" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
