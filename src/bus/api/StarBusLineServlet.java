@@ -1,8 +1,8 @@
 package bus.api;
 
 import bus.StatuCode;
-import bus.orm.entity.BusLocation;
-import bus.orm.service.impl.BusLocationDAOImpl;
+import bus.orm.entity.Collection;
+import bus.orm.service.impl.UserDAOImpl;
 import com.alibaba.dubbo.common.utils.IOUtils;
 import com.google.gson.Gson;
 import org.json.JSONException;
@@ -17,27 +17,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-@WebServlet(name = "DownloadBusLocServlet")
-public class DownloadBusLocServlet extends HttpServlet {
+@WebServlet(name = "StarBusLineServlet")
+public class StarBusLineServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json; charset=utf-8");
         PrintWriter out = response.getWriter();
 
         String info = IOUtils.read(new InputStreamReader(request.getInputStream()));
         Gson gson = new Gson();
-        BusLocation busLocation = gson.fromJson(info, BusLocation.class);
+        Collection collection = gson.fromJson(info, Collection.class);
 
         JSONObject result = new JSONObject();
         try {
-            BusLocationDAOImpl busLocationDAO = new BusLocationDAOImpl();
-            BusLocation b = busLocationDAO.downLocation(busLocation.getBusId());
-            if(b != null){
+            UserDAOImpl userDAO = new UserDAOImpl();
+            if(userDAO.starBusLine(collection)){
                 result.put("code", StatuCode.SUCCESS);
-                result.put("message", "成功");
-                result.put("data", b.toJson());
+                result.put("message", "收藏成功");
             } else {
-                result.put("code", StatuCode.EMPTY);
-                result.put("message", "失败");
+                result.put("code", StatuCode.FAIL);
+                result.put("message", "收藏失败");
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -48,6 +46,6 @@ public class DownloadBusLocServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        out.println("Hello, I am DownloadBusLocServlet");
+        out.println("Hello, I am StarBusLineServlet");
     }
 }

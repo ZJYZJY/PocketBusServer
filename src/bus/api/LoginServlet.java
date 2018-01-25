@@ -1,6 +1,7 @@
 package bus.api;
 
 import bus.StatuCode;
+import bus.orm.entity.Collection;
 import bus.orm.entity.User;
 import bus.orm.service.impl.UserDAOImpl;
 import com.alibaba.dubbo.common.utils.IOUtils;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -31,10 +33,19 @@ public class LoginServlet extends HttpServlet {
         try {
             UserDAOImpl userDAOImpl = new UserDAOImpl();
             User u = userDAOImpl.userLogin(user);
-            if(u != null){
+            if (u != null) {
+                StringBuilder stars = new StringBuilder();
+                List<Collection> collections = userDAOImpl.getStaredBusLines(u.getId());
+                for (int i = 0; i < collections.size(); i++) {
+                    if (i == 0) {
+                        stars.append(collections.get(i).getBusId());
+                    } else {
+                        stars.append("-").append(collections.get(i).getBusId());
+                    }
+                }
                 result.put("code", StatuCode.SUCCESS);
                 result.put("message", "登录成功");
-                result.put("data", u.toJson());
+                result.put("data", u.toJson().put("star", stars.toString()));
             } else {
                 result.put("code", StatuCode.FAIL);
                 result.put("message", "登录失败");

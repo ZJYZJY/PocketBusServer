@@ -44,4 +44,31 @@
         <servlet-name>ClearBusLocServlet</servlet-name>
         <url-pattern>/api/clearLoc</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StarBusLineServlet</servlet-name>
+        <servlet-class>bus.api.StarBusLineServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StarBusLineServlet</servlet-name>
+        <url-pattern>/api/starBusLine</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UnstarBusLineServlet</servlet-name>
+        <servlet-class>bus.api.UnstarBusLineServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UnstarBusLineServlet</servlet-name>
+        <url-pattern>/api/unstarBusLine</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DownloadStaredBusLineServlet</servlet-name>
+        <servlet-class>bus.api.DownloadStaredBusLineServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DownloadStaredBusLineServlet</servlet-name>
+        <url-pattern>/api/getStaredBusLine</url-pattern>
+    </servlet-mapping>
 </web-app>

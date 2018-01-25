@@ -21,5 +21,7 @@
         <mapping resource="bus/orm/entity/User.hbm.xml"/>
         <mapping class="bus.orm.entity.BusLocation"/>
         <mapping resource="bus/orm/entity/BusLocation.hbm.xml"/>
+        <mapping class="bus.orm.entity.Collection"/>
+        <mapping resource="bus/orm/entity/Collection.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
